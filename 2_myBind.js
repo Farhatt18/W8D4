@@ -1,11 +1,22 @@
-Function.prototype.myBind = function(context, ...args){
+Function.prototype.myBind = function(context){
   const that = this;
+  let args = Array.from(arguments).slice(1)
 
-  return function(...callargs){
-    let allArgs = args.concat(callargs)
-    return that.call(context, ...allArgs)
+  return function(){
+
+    let allArgs = Array.from(arguments)
+    return that.apply(context, args.concat(allArgs))
   }
 }
+
+// Function.prototype.myBind = function(context, ...args){
+//   const that = this;
+
+//   return function(...callargs){
+//     let allArgs = args.concat(callargs)
+//     return that.call(context, ...allArgs)
+//   }
+// }
 
 
 // apply version
