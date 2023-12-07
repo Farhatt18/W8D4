@@ -25,7 +25,7 @@ function curriedSum(numArgs) {
   }
 }
 
-console.log(curriedSum(3)(4)(20)(6))
+// console.log(curriedSum(3)(4)(20)(6))
 
 function sumThree(num1, num2, num3) {
   return num1 + num2 + num3;
@@ -34,13 +34,14 @@ function sumThree(num1, num2, num3) {
 sumThree(4, 20, 6); // == 30
 Function.prototype.curry = function(numArgs) {
   let nums = [];
-  let that = this
+  let that = this;
   return function _myCurry(el) {
     nums.push(el)
     if (nums.length < numArgs) {
       return  _myCurry
     } else {
-      return that.apply(nums)
+      // return that.call(...nums);
+      return that.apply(null,nums);
     }
   }
 
@@ -51,4 +52,4 @@ f1 = f1(20); // [Function]
 f1 = f1(6); // = 30
 
 // // or more briefly:
-sumThree.curry(3)(4)(20)(6); // == 30
+console.log(sumThree.curry(3)(4)(20)(6)); // == 30
